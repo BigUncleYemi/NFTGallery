@@ -6,7 +6,7 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import Link from "@mui/icons-material/Link"
+import Link from "@mui/icons-material/Link";
 import { Box, Typography } from "@mui/material";
 import AppCard, { convertIPFSLink } from "../AppCard";
 import { Marked } from "@ts-stack/markdown";
@@ -42,9 +42,12 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
         >
           <Box
             sx={{
-              backgroundImage: `url(${
-                convertIPFSLink(data?.media?.[0]?.gateway || data?.contract?.openSea?.imageUrl || data?.rawMetadata?.image || import.meta.env.VITE_DEFAULT_IMG)
-              })`,
+              backgroundImage: `url(${convertIPFSLink(
+                data?.media?.[0]?.gateway ||
+                  data?.contract?.openSea?.imageUrl ||
+                  data?.rawMetadata?.image ||
+                  import.meta.env.VITE_DEFAULT_IMG
+              )})`,
               height: 300,
               backgroundPosition: "center",
               backgroundSize: "cover",
@@ -70,55 +73,65 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
           >
             <AppCard data={data} justImage />
           </Box>
-          <div style={{ padding: "10px 30px", wordBreak: "break-all" }}>
+          <div style={{ padding: "10px 30px" }}>
             <DialogContentText component="div">
-              <Typography gutterBottom variant="h4" fontWeight="bold" component="div">
+              <Typography
+                gutterBottom
+                variant="h4"
+                fontWeight="bold"
+                component="div"
+              >
                 {data?.rawMetadata?.name || data?.contract?.name}
               </Typography>
             </DialogContentText>
             <DialogContentText component="div">
               <Typography gutterBottom variant="overline" component="div">
-                Collection Name: {data?.contract?.openSea?.collectionName ||
+                Collection Name:{" "}
+                {data?.contract?.openSea?.collectionName ||
                   "This NFT is not part of a collection"}
               </Typography>
             </DialogContentText>
-            <DialogContentText component="div">
-              <Typography gutterBottom variant="h5" component="div">
-                Description
-              </Typography>
-            </DialogContentText>
-            {data?.rawMetadata?.description && (
-              <DialogContentText paddingBottom={3}>
-                {data?.rawMetadata?.description}
+            <div style={{ wordBreak: "break-all" }}>
+              <DialogContentText component="div">
+                <Typography gutterBottom variant="h5" component="div">
+                  Description
+                </Typography>
               </DialogContentText>
-            )}
-            {data?.contract?.description && (
-              <DialogContentText paddingBottom={3}>
-                {data?.contract?.description}
-              </DialogContentText>
-            )}
-            <DialogContentText paddingBottom={3} component="div">
-              {data?.contract?.openSea?.description ? (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: Marked.parse(data?.contract?.openSea?.description),
-                  }}
-                />
-              ) : (
-                <p>There is no description provided.</p>
+              {data?.rawMetadata?.description && (
+                <DialogContentText paddingBottom={3}>
+                  {data?.rawMetadata?.description}
+                </DialogContentText>
               )}
-            </DialogContentText>
-            <DialogActions sx={{ marginBottom: "2.5rem" }}>
-              <AppButton
-                handleOnClick={() =>
-                  window.open(
-                    `https://opensea.io/assets/ethereum/${data?.contract?.address}/${data?.tokenId}`
-                  )
-                }
-                text="Purchase"
-                endIcon={<Link />}
-              />
-            </DialogActions>
+              {data?.contract?.description && (
+                <DialogContentText paddingBottom={3}>
+                  {data?.contract?.description}
+                </DialogContentText>
+              )}
+              <DialogContentText paddingBottom={3} component="div">
+                {data?.contract?.openSea?.description ? (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: Marked.parse(
+                        data?.contract?.openSea?.description
+                      ),
+                    }}
+                  />
+                ) : (
+                  <p>There is no description provided.</p>
+                )}
+              </DialogContentText>
+              <DialogActions sx={{ marginBottom: "2.5rem" }}>
+                <AppButton
+                  handleOnClick={() =>
+                    window.open(
+                      `https://opensea.io/assets/ethereum/${data?.contract?.address}/${data?.tokenId}`
+                    )
+                  }
+                  text="Purchase"
+                  endIcon={<Link />}
+                />
+              </DialogActions>
+            </div>
           </div>
         </DialogContent>
       </Dialog>
