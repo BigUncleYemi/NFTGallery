@@ -5,6 +5,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Marked } from "@ts-stack/markdown";
 
+export const convertIPFSLink = (link: string) => {
+  if (link.startsWith("ipfs://")) {
+    return link.replace("ipfs://", "https://ipfs.io/");
+  }
+  return link;
+}
+
 interface AppCardTye {
   handleViewNFT?: any;
   justImage?: boolean;
@@ -16,7 +23,7 @@ const AppCard: FC<AppCardTye> = ({ handleViewNFT, justImage, data }) => {
     <Card onClick={() => handleViewNFT(data)}>
       <CardMedia
         sx={{ height: 300 }}
-        image={data?.contract?.openSea?.imageUrl || data?.rawMetadata?.image || import.meta.env.VITE_DEFAULT_IMG}
+        image={convertIPFSLink(data?.media?.[0]?.gateway || data?.contract?.openSea?.imageUrl || data?.rawMetadata?.image || import.meta.env.VITE_DEFAULT_IMG)}
         title="green iguana"
       />
       {justImage ? null : (

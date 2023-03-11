@@ -29,7 +29,8 @@ const InputField: FC<{
   handleOnChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
-}> = ({ value, handleOnChange }) => {
+  placeholder?: string;
+}> = ({ value, handleOnChange, placeholder = "" }) => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -44,6 +45,7 @@ const InputField: FC<{
       variant="outlined"
       size="medium"
       value={value}
+      placeholder={placeholder}
       onChange={handleChange}
     />
   );

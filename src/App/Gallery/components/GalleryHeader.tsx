@@ -10,7 +10,7 @@ import { useNFTGalleryContext } from "../../../context";
 const GalleryHeader: FC = () => {
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
-  const { address } = useNFTGalleryContext();
+  const { address, handleRestAddress } = useNFTGalleryContext();
 
   return (
     <Stack
@@ -30,7 +30,7 @@ const GalleryHeader: FC = () => {
               }}
             >
               <div>
-                <BackButton />
+                <BackButton onClick={handleRestAddress} />
               </div>
               <Tooltip title={address} arrow>
                 <Typography
@@ -54,7 +54,7 @@ const GalleryHeader: FC = () => {
             >
               <Stack direction="row" gap={2} alignItems="center">
                 <div>
-                  <BackButton />
+                  <BackButton onClick={handleRestAddress} />
                 </div>
                 <p className="--title">NFT Gallery</p>
               </Stack>

@@ -53,6 +53,7 @@ export function NFTGalleryWrapper({
 
   const handleRestAddress = () => {
     setAddress("");
+    setShowNFT(false);
   };
 
   const handleGetNFts = async () => {
@@ -78,13 +79,19 @@ export function NFTGalleryWrapper({
         setShowNFT(true);
       }
       setLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setLoading(false);
+      setShowToast(true);
+      setToastDetails({
+        status: "error",
+        message: error.toString() ||"An error occurred",
+      });
       setTimeout(() => {
         setShowToast(false);
         setToastDetails({
-          status: "error",
-          message: "An error occurred",
+          status: "info",
+          message: "",
         });
       }, 7000)
     }

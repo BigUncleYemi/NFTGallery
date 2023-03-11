@@ -8,7 +8,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import Link from "@mui/icons-material/Link"
 import { Box, Typography } from "@mui/material";
-import AppCard from "../AppCard";
+import AppCard, { convertIPFSLink } from "../AppCard";
 import { Marked } from "@ts-stack/markdown";
 import AppButton from "../AppButton";
 
@@ -43,9 +43,7 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
           <Box
             sx={{
               backgroundImage: `url(${
-                data?.contract?.openSea?.imageUrl ||
-                data?.rawMetadata?.image ||
-                import.meta.env.VITE_DEFAULT_IMG
+                convertIPFSLink(data?.media?.[0]?.gateway || data?.contract?.openSea?.imageUrl || data?.rawMetadata?.image || import.meta.env.VITE_DEFAULT_IMG)
               })`,
               height: 300,
               backgroundPosition: "center",
@@ -72,7 +70,7 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
           >
             <AppCard data={data} justImage />
           </Box>
-          <div style={{ padding: "10px 30px" }}>
+          <div style={{ padding: "10px 30px", wordBreak: "break-all" }}>
             <DialogContentText component="div">
               <Typography gutterBottom variant="h4" fontWeight="bold" component="div">
                 {data?.rawMetadata?.name || data?.contract?.name}
@@ -110,7 +108,7 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
                 <p>There is no description provided.</p>
               )}
             </DialogContentText>
-            <DialogActions>
+            <DialogActions sx={{ marginBottom: "2.5rem" }}>
               <AppButton
                 handleOnClick={() =>
                   window.open(

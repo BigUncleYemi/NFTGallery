@@ -14,9 +14,9 @@ const CustomIconButton = styled(IconButton)<ButtonProps>(({ theme }) => ({
   },
 }));
 
-const BackButton: FC = () => {
+const BackButton: FC<{onClick: () => void}> = ({ onClick }) => {
   return (
-    <CustomIconButton variant="contained" size="medium"><ArrowBack fontSize="small" /></CustomIconButton>
+    <CustomIconButton variant="contained" size="medium" onClick={onClick}><ArrowBack fontSize="small" /></CustomIconButton>
   )
 }
 

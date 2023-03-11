@@ -27,7 +27,7 @@ const Home: FC = () => {
               width: matchDownMd ? "80vw" : "60vw ",
             }}
           >
-            <InputField value={address} handleOnChange={handleOnChangeAddress} />
+            <InputField value={address} handleOnChange={handleOnChangeAddress} placeholder="Enter address" />
           </Box>
           <Box>
             <AppButton handleOnClick={handleGetNFts} text="Submit" loading={loading} disabled={!address} />
