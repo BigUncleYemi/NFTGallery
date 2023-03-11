@@ -58,7 +58,8 @@ export function NFTGalleryWrapper({
   const handleGetNFts = async () => {
     setLoading(true);
     try {
-      const res: OwnedNftsResponse = await getAddressNFT(address);
+      const res = await getAddressNFT(address);
+      // @ts-ignore
       if (res?.ownedNfts?.length < 1) {
         setShowToast(true);
         setToastDetails({

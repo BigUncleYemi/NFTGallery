@@ -6,7 +6,7 @@ import Typography from "@mui/material/Typography";
 import { Marked } from "@ts-stack/markdown";
 
 interface AppCardTye {
-  handleViewNFT?: (data: any) => void;
+  handleViewNFT?: any;
   justImage?: boolean;
   data: any;
 }
