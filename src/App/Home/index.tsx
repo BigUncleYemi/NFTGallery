@@ -18,8 +18,7 @@ const Home: FC = () => {
       <section>
         <Stack gap={3}>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Description.
+            NFT Gallery for ethereum based addresses.
           </p>
           <Box
             sx={{
