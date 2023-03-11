@@ -6,20 +6,26 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
-import { Box } from "@mui/material";
+import Link from "@mui/icons-material/Link"
+import { Box, Typography } from "@mui/material";
 import AppCard from "../AppCard";
+import { Marked } from "@ts-stack/markdown";
+import AppButton from "../AppButton";
 
 interface AppGalleryModalType {
   open: boolean;
+  data: any;
   handleCloseModal: () => void;
 }
 
 const AppGalleryModal: FC<AppGalleryModalType> = ({
   open,
   handleCloseModal,
+  data,
 }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+  console.log(data);
 
   return (
     <div>
@@ -32,12 +38,19 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
         maxWidth="lg"
         scroll="paper"
       >
-        <DialogContent sx={{ padding: 0 }}>
+        <DialogContent
+          sx={fullScreen ? { padding: 0 } : { padding: 0, minWidth: 900 }}
+        >
           <Box
             sx={{
-              backgroundImage: `url('https://cdn.dribbble.com/userupload/2951612/file/original-daeee5f7b7f709b42c16905144e3f547.png')`,
+              backgroundImage: `url(${
+                data?.contract?.openSea?.imageUrl ||
+                data?.rawMetadata?.image ||
+                import.meta.env.VITE_DEFAULT_IMG
+              })`,
               height: 300,
               backgroundPosition: "center",
+              backgroundSize: "cover",
               position: "relative",
               display: fullScreen ? "none" : "block",
             }}
@@ -58,17 +71,58 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
                   }
             }
           >
-            <AppCard justImage />
+            <AppCard data={data} justImage />
           </Box>
-          <DialogContentText padding={3}>
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
-          </DialogContentText>
-          <DialogActions>
-            <Button autoFocus variant="contained" color="success">
-              Purchase
-            </Button>
-          </DialogActions>
+          <div style={{ padding: "10px 30px" }}>
+            <DialogContentText component="div">
+              <Typography gutterBottom variant="h4" fontWeight="bold" component="div">
+                {data?.rawMetadata?.name || data?.contract?.name}
+              </Typography>
+            </DialogContentText>
+            <DialogContentText component="div">
+              <Typography gutterBottom variant="overline" component="div">
+                Collection Name: {data?.contract?.openSea?.collectionName ||
+                  "This NFT is not part of a collection"}
+              </Typography>
+            </DialogContentText>
+            <DialogContentText component="div">
+              <Typography gutterBottom variant="h5" component="div">
+                Description
+              </Typography>
+            </DialogContentText>
+            {data?.rawMetadata?.description && (
+              <DialogContentText paddingBottom={3}>
+                {data?.rawMetadata?.description}
+              </DialogContentText>
+            )}
+            {data?.contract?.description && (
+              <DialogContentText paddingBottom={3}>
+                {data?.contract?.description}
+              </DialogContentText>
+            )}
+            <DialogContentText paddingBottom={3} component="div">
+              {data?.contract?.openSea?.description ? (
+                <div
+                  dangerouslySetInnerHTML={{
+                    __html: Marked.parse(data?.contract?.openSea?.description),
+                  }}
+                />
+              ) : (
+                <p>There is no description provided.</p>
+              )}
+            </DialogContentText>
+            <DialogActions>
+              <AppButton
+                handleOnClick={() =>
+                  window.open(
+                    `https://opensea.io/assets/ethereum/${data?.contract?.address}/${data?.tokenId}`
+                  )
+                }
+                text="Purchase"
+                endIcon={<Link />}
+              />
+            </DialogActions>
+          </div>
         </DialogContent>
       </Dialog>
     </div>

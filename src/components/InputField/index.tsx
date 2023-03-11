@@ -1,11 +1,10 @@
 import { styled } from "@mui/material/styles";
 import { TextField } from "@mui/material";
 import { FC } from "react";
-import { useNFTGalleryContext } from "../../context";
 
 const CustomTextField = styled(TextField)({
   width: "100%",
-  '& .MuiInputBase-input': {
+  "& .MuiInputBase-input": {
     textAlign: "center",
   },
   "& .MuiOutlinedInput-root": {
@@ -25,9 +24,29 @@ const CustomTextField = styled(TextField)({
   },
 });
 
-const InputField: FC = () => {
-  const { address, handleOnChangeAddress } = useNFTGalleryContext();
-  return <CustomTextField id="input" variant="outlined" size="medium" value={address} onChange={handleOnChangeAddress} />;
+const InputField: FC<{
+  value: string;
+  handleOnChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+}> = ({ value, handleOnChange }) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    // const address = e.target.value;
+    // const valid = WAValidator.validate(address);
+    // console.log(valid);
+    handleOnChange(e);
+  };
+  return (
+    <CustomTextField
+      id="input"
+      variant="outlined"
+      size="medium"
+      value={value}
+      onChange={handleChange}
+    />
+  );
 };
 
 export default InputField;

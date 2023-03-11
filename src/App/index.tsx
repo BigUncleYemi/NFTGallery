@@ -1,19 +1,18 @@
-import { FC, useState } from "react";
-import "./App.css";
-import Header from "../components/Header";
+import { FC } from "react";
 import Footer from "../components/Footer";
 import Gallery from "./Gallery";
 import Home from "./Home";
-import { NFTGalleryWrapper } from "../context";
+import { NFTGalleryWrapper, useNFTGalleryContext } from "../context";
+import "./App.css";
 
 const App: FC = () => {
+  const { showNFTPage } = useNFTGalleryContext();
+  
   return (
-    <NFTGalleryWrapper>
-      <main>
-        {false ? <Gallery /> : <Home />}
-        <Footer />
-      </main>
-    </NFTGalleryWrapper>
+    <main>
+      {showNFTPage ? <Gallery /> : <Home />}
+      <Footer />
+    </main>
   );
 };
 

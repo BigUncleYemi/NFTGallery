@@ -5,10 +5,12 @@ import { FC } from "react";
 import Header from "../../../components/Header";
 import "../../App.css";
 import BackButton from "../../../components/AppButton/BackButton";
+import { useNFTGalleryContext } from "../../../context";
 
 const GalleryHeader: FC = () => {
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
+  const { address } = useNFTGalleryContext();
 
   return (
     <Stack
@@ -30,13 +32,13 @@ const GalleryHeader: FC = () => {
               <div>
                 <BackButton />
               </div>
-              <Tooltip title="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" arrow>
+              <Tooltip title={address} arrow>
                 <Typography
                   component="h2"
                   fontSize={"1.5rem"}
                   sx={{ overflowX: "scroll" }}
                 >
-                  1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+                  {address}
                 </Typography>
               </Tooltip>
             </Stack>
@@ -56,13 +58,13 @@ const GalleryHeader: FC = () => {
                 </div>
                 <p className="--title">NFT Gallery</p>
               </Stack>
-              <Tooltip title="1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" arrow>
+              <Tooltip title="address" arrow>
                 <Typography
                   component="h2"
                   fontSize={"1.5rem"}
                   sx={{ overflowX: "scroll" }}
                 >
-                  1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+                  {address}
                 </Typography>
               </Tooltip>
             </Stack>

@@ -5,10 +5,12 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import AppButton from "../../components/AppButton";
 import Header from "../../components/Header";
 import InputField from "../../components/InputField";
+import { useNFTGalleryContext } from "../../context";
 
 const Home: FC = () => {
   const theme = useTheme();
   const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
+  const { address, handleOnChangeAddress, handleGetNFts, loading } = useNFTGalleryContext();
 
   return (
     <>
@@ -26,10 +28,10 @@ const Home: FC = () => {
               width: matchDownMd ? "80vw" : "60vw ",
             }}
           >
-            <InputField />
+            <InputField value={address} handleOnChange={handleOnChangeAddress} />
           </Box>
           <Box>
-            <AppButton />
+            <AppButton handleOnClick={handleGetNFts} text="Submit" loading={loading} disabled={!address} />
           </Box>
         </Stack>
       </section>
