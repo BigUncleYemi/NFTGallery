@@ -78,9 +78,15 @@ export function NFTGalleryWrapper({
         setShowNFT(true);
       }
       setLoading(false);
-      console.log(res);
     } catch (error) {
       console.log(error);
+      setTimeout(() => {
+        setShowToast(false);
+        setToastDetails({
+          status: "error",
+          message: "An error occurred",
+        });
+      }, 7000)
     }
   };
 

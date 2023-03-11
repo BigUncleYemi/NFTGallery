@@ -25,7 +25,6 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
 }) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  console.log(data);
 
   return (
     <div>
