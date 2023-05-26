@@ -43,7 +43,7 @@ const Gallery: FC = () => {
           </Grid>
         ))}
         <Box padding={6} paddingBottom={0}>
-          <Pagination count={10} page={page} rowsPerPage={rowsPerPage} onChange={handleChange} />
+          <Pagination count={10} page={page} total={NFTData?.ownedNfts?.lenght} onChange={handleChange} />
         </Box>
       </Grid>
     </>
