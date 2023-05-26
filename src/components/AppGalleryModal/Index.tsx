@@ -120,17 +120,6 @@ const AppGalleryModal: FC<AppGalleryModalType> = ({
                   <p>There is no description provided.</p>
                 )}
               </DialogContentText>
-              <DialogActions sx={{ marginBottom: "2.5rem" }}>
-                <AppButton
-                  handleOnClick={() =>
-                    window.open(
-                      `https://opensea.io/assets/ethereum/${data?.contract?.address}/${data?.tokenId}`
-                    )
-                  }
-                  text="Purchase"
-                  endIcon={<Link />}
-                />
-              </DialogActions>
             </div>
           </div>
         </DialogContent>

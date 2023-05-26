@@ -10,7 +10,8 @@ const Gallery: FC = () => {
   const [nft, setNFT] = useState({});
   const { NFTData = { ownedNfts: [] } } = useNFTGalleryContext();
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(20);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
@@ -33,13 +34,16 @@ const Gallery: FC = () => {
         handleCloseModal={handleClose}
       />
       <Grid container spacing={{ xs: 2, md: 3 }} padding={2}>
-        {NFTData?.ownedNfts?.map((ownedNft: any, index: number) => (
+        {NFTData?.ownedNfts?.slice(
+          page * rowsPerPage,
+          page * rowsPerPage + rowsPerPage,
+        )?.map((ownedNft: any, index: number) => (
           <Grid key={index} item xs={12} sm={6} md={4} lg={3}>
             <AppCard handleViewNFT={handleClickOpen} data={ownedNft} />
           </Grid>
         ))}
         <Box padding={6} paddingBottom={0}>
-          <Pagination count={10} page={page} onChange={handleChange} />
+          <Pagination count={10} page={page} rowsPerPage={rowsPerPage} onChange={handleChange} />
         </Box>
       </Grid>
     </>
