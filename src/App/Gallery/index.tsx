@@ -10,7 +10,7 @@ const Gallery: FC = () => {
   const [nft, setNFT] = useState({});
   const { NFTData = { ownedNfts: [] } } = useNFTGalleryContext();
 
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(20);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
