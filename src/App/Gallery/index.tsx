@@ -42,11 +42,9 @@ const Gallery: FC = () => {
             <AppCard handleViewNFT={handleClickOpen} data={ownedNft} />
           </Grid>
         ))}
-        {NFTData?.ownedNfts?.length > 0 && (
-          <Box padding={6} paddingBottom={0}>
-            <Pagination onChange={handleChange} />
-          </Box>
-        )}
+        <Box padding={6} paddingBottom={0}>
+          <Pagination onChange={handleChange} />
+        </Box>
       </Grid>
     </>
   );
