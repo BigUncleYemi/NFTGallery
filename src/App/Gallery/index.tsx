@@ -44,7 +44,7 @@ const Gallery: FC = () => {
         ))}
         {NFTData?.ownedNfts?.length > 0 && (
           <Box padding={6} paddingBottom={0}>
-            <Pagination defaultCurrent={1} total={NFTData?.ownedNfts?.length} onChange={handleChange} />
+            <Pagination defaultCurrent={1} total={NFTData?.ownedNfts?.length || 0} onChange={handleChange} />
           </Box>
         )}
       </Grid>
