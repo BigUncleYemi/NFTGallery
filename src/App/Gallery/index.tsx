@@ -25,6 +25,8 @@ const Gallery: FC = () => {
     setOpenModal(false);
   };
 
+  const total = NFTData?.ownedNfts?.length || 0;
+
   return (
     <>
       <GalleryHeader />
@@ -43,7 +45,7 @@ const Gallery: FC = () => {
           </Grid>
         ))}
         <Box padding={6} paddingBottom={0}>
-          <Pagination onChange={handleChange} />
+          <Pagination count={total/ rowsPerPage} page={page} onChange={handleChange} />
         </Box>
       </Grid>
     </>
