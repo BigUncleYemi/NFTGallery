@@ -45,7 +45,7 @@ const Gallery: FC = () => {
           </Grid>
         ))}
         <Box padding={6} paddingBottom={0}>
-          <Pagination defaultPage={1} count={total/ rowsPerPage} page={page} onChange={handleChange} />
+          <Pagination count={total/ rowsPerPage} page={page + 1} onChange={handleChange} />
         </Box>
       </Grid>
     </>
