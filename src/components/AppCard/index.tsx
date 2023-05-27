@@ -23,7 +23,7 @@ const AppCard: FC<AppCardTye> = ({ handleViewNFT, justImage, data }) => {
     <Card onClick={() => handleViewNFT(data)}>
       <CardMedia
         sx={{ height: 300 }}
-        image={convertIPFSLink(data?.media?.[0]?.gateway || data?.contract?.openSea?.imageUrl || data?.rawMetadata?.image || import.meta.env.VITE_DEFAULT_IMG)}
+        image={convertIPFSLink(data?.rawMetadata?.image || data?.contract?.openSea?.imageUrl || data?.media?.[0]?.gateway || import.meta.env.VITE_DEFAULT_IMG)}
         title="green iguana"
       />
       {justImage ? null : (
