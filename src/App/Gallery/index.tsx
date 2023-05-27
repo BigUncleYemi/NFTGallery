@@ -13,7 +13,7 @@ const Gallery: FC = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(20);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
+    setPage(value -1 );
   };
 
   const handleClickOpen = (data: any) => {
