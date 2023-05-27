@@ -10,7 +10,7 @@ const Gallery: FC = () => {
   const [nft, setNFT] = useState({});
   const { NFTData = { ownedNfts: [] } } = useNFTGalleryContext();
 
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(20);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
@@ -45,7 +45,7 @@ const Gallery: FC = () => {
           </Grid>
         ))}
         <Box padding={6} paddingBottom={0}>
-          <Pagination count={total/ rowsPerPage} page={page} onChange={handleChange} />
+          <Pagination defaultPage={1} count={total/ rowsPerPage} page={page} onChange={handleChange} />
         </Box>
       </Grid>
     </>
